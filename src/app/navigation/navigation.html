@@ -14,8 +14,15 @@
       </li>
     </ul>
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Login
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="loginDropdown">
+          <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
+          <li><a class="dropdown-item" routerLink="/account-activity">Account Activity</a></li>
+          <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+        </ul>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>

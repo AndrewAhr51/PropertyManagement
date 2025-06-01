@@ -1,3 +1,4 @@
+import { AuthService } from './../AuthService/AuthService';
 import { Component, OnInit, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -6,7 +7,8 @@ import { CommonModule } from '@angular/common';
   selector: 'app-navigation',
   imports: [RouterModule, CommonModule],
   templateUrl: './navigation.html',
-  styleUrls: ['./navigation.css']
+  styleUrls: ['./navigation.css'],
+  providers: [AuthService]
 })
 export class Navigation implements OnInit {
   isDarkMode = signal(false);
@@ -16,7 +18,15 @@ export class Navigation implements OnInit {
     const savedMode = localStorage.getItem('darkMode') === 'true';
     this.isDarkMode.set(savedMode);
     document.body.classList.toggle('dark-mode', savedMode);
+
   }
+
+   constructor(private AuthService: AuthService) {}
+
+  logout() {
+    this.AuthService.logout();
+  }
+
 
  toggleDarkMode() {
   this.isDarkMode.update((prev) => !prev);

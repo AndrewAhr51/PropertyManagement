@@ -27,6 +27,7 @@
     "@angular/build": "^20.0.0",
     "@angular/cli": "^20.0.0",
     "@angular/compiler-cli": "^20.0.0",
+    "@angular/material": "^20.0.1",
     "@nx/angular": "21.1.2",
     "@nx/workspace": "21.1.2",
     "@schematics/angular": "^20.0.0",
@@ -39,5 +40,50 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "nx": "21.1.2",
     "typescript": "~5.8.2"
-  }
+  },
+  "nx": {
+    "npmScope": "property-management",
+    "affected": {
+      "defaultBase": "main"
+    },
+    "targetDefaults": {
+      "build": {
+        "dependsOn": [
+          "^build"
+        ],
+        "outputs": [
+          "{options.outputPath}"
+        ]
+      },
+      "test": {
+        "dependsOn": [
+          "^test"
+        ]
+      },
+      "lint": {
+        "dependsOn": [
+          "^lint"
+        ]
+      }
+    }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nx/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ]
+      }
+    }
+  },
+  "workspaceLayout": {
+    "appsDir": "apps",
+    "libsDir": "libs"
+  },
+  "defaultProject": "PropertyManagement",
+  "projects": {}
 }
