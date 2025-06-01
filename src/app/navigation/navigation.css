@@ -1,0 +1,83 @@
+.navbar {
+  padding: 10px 20px;
+  background-color: #f8f9fa; /* Light background */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Brand Styling */
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* Navbar Links */
+.navbar-nav .nav-link {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #343a40;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #007bff;
+}
+
+/* Search Bar */
+.navbar-nav input.form-control {
+  width: 200px;
+  margin-left: 10px;
+}
+
+/* Dark Mode Button */
+.navbar-nav .btn-dark {
+  border-radius: 20px;
+  padding: 5px 15px;
+}
+
+/* Navbar Toggle Button */
+.navbar-toggler {
+  border: none;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .navbar-nav .nav-item {
+    padding: 5px 0;
+  }
+
+  .navbar-nav input.form-control {
+    width: 100%;
+  }
+  .navbar-nav .btn-dark {
+    width: 100%;
+    margin-top: 10px;
+  }
+  .navbar-nav .nav-link.active {
+  background-color: #007bff !important;
+  color: white !important;
+  border-radius: 5px;
+  padding: 5px 10px;
+  }
+/* Light and Dark Mode Variables */
+:root {
+  --nav-bg-light: #f8f9fa;
+  --nav-text-light: black;
+  --nav-bg-dark: #212529;
+  --nav-text-dark: white;
+}
+
+.navbar-light {
+  background-color: var(--nav-bg-light);
+  color: var(--nav-text-light);
+}
+
+.navbar-dark {
+  background-color: var(--nav-bg-dark);
+  color: var(--nav-text-dark);
+}
+}

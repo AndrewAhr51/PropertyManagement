@@ -1,0 +1,30 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card shadow-lg p-4">
+    <h2 class="text-center mb-4">Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter your email" required>
+        <div *ngIf="loginForm.controls.email.invalid && loginForm.controls.email.touched" class="invalid-feedback">
+          Please enter a valid email address.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <div class="input-group">
+          <input type="password" class="form-control" id="password" formControlName="password" placeholder="Enter your password" required minlength="6">
+          <button class="btn btn-outline-secondary" type="button" (click)="togglePassword()">👁</button>
+        </div>
+        <div *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched" class="invalid-feedback">
+          Password must be at least 6 characters.
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid">Login</button>
+      <p class="text-center mt-3">
+        Not a user? <a routerLink="/register" class="text-primary">Register here</a>
+      </p>
+    </form>
+  </div>
+</div>

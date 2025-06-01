@@ -1,0 +1,83 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10 col-sm-12">
+      <div class="card shadow">
+        <div class="card-body">
+          <h2 class="text-center mb-4">Register</h2>
+          <form>
+            <!-- Name Fields in One Row -->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input type="text" class="form-control" id="firstName" placeholder="Enter your first name" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="lastName" class="form-label">Last Name</label>
+                  <input type="text" class="form-control" id="lastName" placeholder="Enter your last name" required>
+                </div>
+              </div>
+            </div>
+
+            <!-- City, State, Zip in One Row -->
+            <div class="row">
+              <div class="col-md-4">
+                <div class="mb-3">
+                  <label for="city" class="form-label">City</label>
+                  <input type="text" class="form-control" id="city" placeholder="Enter your city" required>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="mb-3">
+                  <label for="state" class="form-label">State</label>
+                  <select class="form-select" id="state" required>
+                    <option value="" disabled selected>Select your state</option>
+                    <option value="FL">Florida</option>
+                    <option value="CA">California</option>
+                    <option value="NY">New York</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="mb-3">
+                  <label for="zipcode" class="form-label">Zip Code</label>
+                  <input type="text" class="form-control" id="zipcode" placeholder="Enter zip code" required>
+                </div>
+              </div>
+            </div>
+
+            <!-- Other Fields Below -->
+            <div class="mb-3">
+              <label for="emailAddress" class="form-label">Email Address</label>
+              <input type="email" class="form-control" id="emailAddress" placeholder="Enter email" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="emailAddressConfirm" class="form-label">Confirm Email Address</label>
+              <input type="email" class="form-control" id="emailAddressConfirm" placeholder="Enter email" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="phoneNumber" class="form-label">Phone Number</label>
+              <input type="tel" class="form-control" id="phoneNumber" placeholder="Enter phone number" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="preferredContactMethod" class="form-label">Preferred Contact Method</label>
+              <select class="form-select" id="preferredContactMethod" required>
+                <option value="" disabled selected>Select contact method</option>
+                <option value="phone">Phone</option>
+                <option value="email">Email</option>
+                <option value="text">Text Message</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 mt-3">Register</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

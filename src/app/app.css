@@ -1,0 +1,19 @@
+.footer {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+}
+
+.footer h5 {
+  font-weight: bold;
+}
+
+.footer a {
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer i {
+  font-size: 20px;
+}
