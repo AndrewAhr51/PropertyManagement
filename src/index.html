@@ -10,5 +10,30 @@
 </head>
 <body>
   <app-root></app-root>
+  <!-- Place this script at the end of the body -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  const emailInput = document.getElementById("emailAddress");
+  const confirmEmailInput = document.getElementById("emailAddressConfirm");
+  const errorMessage = document.getElementById("emailError");
+
+  if (!emailInput || !confirmEmailInput || !errorMessage) return; // Ensure elements exist
+
+  function validateEmails() {
+    const email = emailInput.value.trim().toLowerCase();
+    const confirmEmail = confirmEmailInput.value.trim().toLowerCase();
+
+    if (email && confirmEmail && email !== confirmEmail) {
+      errorMessage.classList.remove("d-none");
+      errorMessage.textContent = "Emails do not match!";
+    } else {
+      errorMessage.classList.add("d-none");
+    }
+  }
+
+  emailInput.addEventListener("blur", validateEmails);
+  confirmEmailInput.addEventListener("blur", validateEmails);
+});
+</script>
 </body>
 </html>
