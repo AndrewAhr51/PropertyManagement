@@ -1,34 +1,35 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Navigation } from './navigation/navigation';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [RouterOutlet, ReactiveFormsModule, Navigation],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css'] // ✅ Fixed typo here
 })
-export class App {
-isDarkMode = signal(false);
+export class App implements OnInit {
+  isDarkMode = signal(false);
 
-  // Load dark mode preference when the app starts
+
   ngOnInit() {
   const savedMode = localStorage.getItem('darkMode') === 'true';
-  this.isDarkMode.set(savedMode);
-  document.body.classList.toggle('dark-mode', savedMode);
+
+  document.body.classList.remove('light', 'dark');
+  document.body.classList.add(savedMode ? 'dark' : 'light');
 }
 
-  // Toggle dark mode and store the preference
-  toggleDarkMode() {
-    this.isDarkMode.update((prev) => !prev);
-    document.body.classList.toggle('dark-mode', this.isDarkMode());
+toggleDarkMode() {
+  this.isDarkMode.update(prev => !prev);
+  const isDark = this.isDarkMode();
 
-    localStorage.setItem('darkMode', this.isDarkMode().toString());
+  document.documentElement.className = ''; // Clear all classes
+  document.documentElement.classList.add(isDark ? 'dark-mode' : 'light');
 
-    // Debugging logs
-    console.log('Dark Mode Set:', this.isDarkMode());
-    console.log('Stored in Local Storage:', localStorage.getItem('darkMode'));
-  }
+  localStorage.setItem('darkMode', isDark.toString());
+}
+
   protected title = 'PropertyManagement';
 }

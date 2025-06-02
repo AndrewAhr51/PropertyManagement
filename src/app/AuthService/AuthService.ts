@@ -12,7 +12,11 @@ export class AuthService {
     localStorage.removeItem('userToken');
     localStorage.removeItem('userData');
 
-    // Redirect to login page
-    this.router.navigate(['/login']);
+    // Ensure navigation execution
+    setTimeout(() => {
+      if (this.router) {
+        this.router.navigate(['/login']).catch(err => console.error('Navigation error:', err));
+      }
+    }, 0);
   }
 }
