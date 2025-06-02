@@ -1,26 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../AuthService/AuthService';
 import { Router } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
-
-
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  standalone: true, // ✅ Declare it as standalone
+  imports: [CommonModule, ReactiveFormsModule], // ✅ Import modules directly
   templateUrl: './login.html',
-  styleUrl: './login.css'
+  styleUrls: ['./login.css']
 })
-export class Login implements OnInit {
-  loginForm: FormGroup;
-   showPassword = false;
 
+export class LoginComponent implements OnInit, CommonModule {
+  loginForm!: FormGroup;
+  showPassword: boolean = false; // ✅ Fix signal usage
 
-  constructor(private fb: FormBuilder, private router: Router) {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
-    });
-  }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -29,18 +24,26 @@ export class Login implements OnInit {
     });
   }
 
-
-   onSubmit() {
-    if (this.loginForm.valid) {
-      console.log('Login successful', this.loginForm.value);
-    }
-  }
-
   togglePassword() {
     this.showPassword = !this.showPassword;
-    const passwordField = document.getElementById('password') as HTMLInputElement;
-    passwordField.type = this.showPassword ? 'text' : 'password';
   }
 
+  onSubmit() {
+    if (this.loginForm.invalid) return; // ✅ Prevents unnecessary execution
 
+    const { email, password } = this.loginForm.value;
+
+    // Simulated authentication logic (replace with actual API call)
+    const fakeToken = 'user123token';
+    const userData = { email };
+
+    this.authService.login(fakeToken, userData);
+
+    // Navigate only after authentication update
+    this.authService.isLoggedIn$.pipe().subscribe((isLoggedIn) => {
+      if (isLoggedIn) {
+        this.router.navigate(['/home']);
+      }
+    });
+  }
 }

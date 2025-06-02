@@ -15,16 +15,17 @@
     </ul>
     <ul class="navbar-nav">
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Login
+        <a class="nav-link dropdown-toggle" id="authDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{ isLoggedIn ? 'Logout' : 'Login' }}
         </a>
-        <ul class="dropdown-menu" aria-labelledby="loginDropdown">
-          <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
-          <li><a class="dropdown-item" routerLink="/account-activity">Account Activity</a></li>
-          <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+        <ul class="dropdown-menu">
+          <li *ngIf="isLoggedIn"><a class="dropdown-item" routerLink="/profile">Profile</a></li>
+          <li *ngIf="isLoggedIn"><a class="dropdown-item" routerLink="/account-activity">Account Activity</a></li>
+          <li *ngIf="isLoggedIn"><a class="dropdown-item" (click)="logout()">Logout</a></li>
+          <li *ngIf="!isLoggedIn"><a class="dropdown-item" routerLink="/login">Login</a></li>
         </ul>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="!isLoggedIn">
         <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
       </li>
       <li class="nav-item">
