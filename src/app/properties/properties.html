@@ -1,1 +1,43 @@
-<p>properties works!</p>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-striped table-responsive">
+        <thead class="table-dark">
+          <tr>
+            <th style="display: none;">Property ID</th> <!-- Hidden column -->
+            <th>Name</th>
+            <th>Address</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let property of properties">
+            <td *ngIf="false">{{ property.property_id }}</td> <!-- Fully hidden from DOM -->
+            <td>
+            <a routerLink="/property/{{ property.property_id }}" class="text-primary">
+                {{ property.name }}
+              </a>
+            </td>
+            <td>
+              {{ property.address }}
+              <ng-container *ngIf="property.address1?.trim()">
+                , {{ property.address1 }}
+              </ng-container>
+              , {{ property.city }}, {{ property.state }} {{ property.zipcode }}
+            </td>
+            <td>
+              <span class="badge" [ngClass]="{
+                'bg-success': property.status === 'Available',
+                'bg-warning': property.status === 'Maintenance',
+                'bg-danger': property.status === 'Occupied',
+                'bg-secondary': !['Available', 'Maintenance', 'Occupied'].includes(property.status)
+              }">
+                {{ property.status }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

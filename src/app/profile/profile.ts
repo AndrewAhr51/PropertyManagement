@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -21,16 +21,32 @@ export class ProfileComponent implements OnInit { // ✅ Implementing OnInit for
 
   private initializeForm() {
     this.profileForm = this.fb.group({
-      name: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      confirmEmail: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      phone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]], // ✅ Added phone validation
+      confirmPassword: ['', Validators.required],
+      phone: ['', Validators.required],
       address: ['', Validators.required],
       address1: [''],
       city: ['', Validators.required],
       state: ['', Validators.required],
-      zipcode: ['', [Validators.required, Validators.pattern(/^\d{5}$/)]], // ✅ Added proper zipcode validation
-    });
+      zipcode: ['', Validators.required]
+    }, { validator: this.matchFields('email', 'confirmEmail') });
+
+  }
+  matchFields(field1: string, field2: string) {
+    return (form: FormGroup) => {
+      const val1 = form.controls[field1].value;
+      const val2 = form.controls[field2].value;
+
+      if (val1 !== val2) {
+        form.controls[field2].setErrors({ mismatch: true });
+      } else {
+        form.controls[field2].setErrors(null);
+      }
+    };
   }
 
   onSubmit() {

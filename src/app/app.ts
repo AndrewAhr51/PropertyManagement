@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Component, signal, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login';
 import { Navigation } from "./navigation/navigation";
 

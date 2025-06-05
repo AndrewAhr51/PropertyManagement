@@ -1,3 +1,4 @@
+
 :root {
   --bg-color-light: white;
   --text-color-light: black;
@@ -38,4 +39,8 @@ body {
 
 .footer i {
   font-size: 20px;
+}
+
+.footer {
+  padding-top: 20px; /* Ensures footer doesn't touch the form */
 }
