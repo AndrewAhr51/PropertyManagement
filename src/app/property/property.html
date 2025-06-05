@@ -1,0 +1,47 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <div class="card shadow-lg p-4">
+        <h2 class="text-center mb-3">{{ property.name }}</h2>
+        <p class="text-muted text-center mb-3">{{ property.type }}</p>
+
+        <div class="property-info">
+          <p class="mb-3"><strong>Property ID:</strong> {{ property.property_id }}</p>
+          <p class="mb-3"><strong>Address:</strong>
+            {{ property.address }}
+            <span *ngIf="property.address1?.trim()">, {{ property.address1 }}</span>,
+            {{ property.city }}, {{ property.state }} {{ property.zipcode }}
+          </p>
+          <p class="mb-3"><strong>Square Footage:</strong> {{ property.sq_ft }} sqft</p>
+          <p class="mb-3"><strong>Year Built:</strong> {{ property.year_built }}</p>
+          <p class="mb-3"><strong>Bedrooms:</strong> {{ property.bedrooms }}</p>
+          <p class="mb-3"><strong>Bathrooms:</strong> {{ property.bathrooms }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow-lg p-4">
+        <h3 class="text-center mb-3">Financials & Status</h3>
+
+        <div class="property-info">
+          <p class="mb-3"><strong>Rent Price:</strong> ${{ property.rent_price }}/month</p>
+          <p class="mb-3"><strong>Purchase Price:</strong> ${{ property.purchase_price }}</p>
+          <p class="mb-3"><strong>Owner ID:</strong> {{ property.owner_id }}</p>
+          <p class="mb-3"><strong>Status:</strong>
+            <span class="badge" [ngClass]="{
+              'bg-success': property.status === 'Available',
+              'bg-warning': property.status === 'Maintenance',
+              'bg-danger': property.status === 'Occupied'
+            }">{{ property.status }}</span>
+          </p>
+        </div>
+
+        <div class="d-flex justify-content-center gap-3 mt-4">
+          <button class="btn btn-primary">Contact Owner</button>
+          <button class="btn btn-outline-secondary">View Lease</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

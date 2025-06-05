@@ -4,7 +4,7 @@
       <div class="card shadow">
         <div class="card-body">
           <h2 class="text-center mb-4">Register</h2>
-          <form>
+          <form id="registerForm" novalidate>
             <!-- Name Fields in One Row -->
             <div class="row">
               <div class="col-md-6">
@@ -49,14 +49,17 @@
             </div>
 
             <!-- Other Fields Below -->
-            <div class="mb-3">
+           <div class="mb-3">
               <label for="emailAddress" class="form-label">Email Address</label>
-              <input type="email" class="form-control" id="emailAddress" placeholder="Enter email" required>
+              <input type="email" class="form-control" id="emailAddress" placeholder="Enter email" required
+                onpaste="return false;" oncopy="return false;">
             </div>
 
             <div class="mb-3">
               <label for="emailAddressConfirm" class="form-label">Confirm Email Address</label>
-              <input type="email" class="form-control" id="emailAddressConfirm" placeholder="Enter email" required>
+              <input type="email" class="form-control" id="emailAddressConfirm" placeholder="Enter email" required
+                onpaste="return false;" oncopy="return false;">
+              <small id="emailError" class="text-danger d-none">Emails do not match!</small>
             </div>
 
             <div class="mb-3">

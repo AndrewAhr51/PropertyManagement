@@ -1,0 +1,106 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <div class="container">
+    <div class="row">
+      <!-- First Name & Last Name -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="firstName" class="form-label required-label">First Name:</label>
+            <input id="firstName" formControlName="firstName" type="text" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label for="lastName" class="form-label required-label">Last Name:</label>
+            <input id="lastName" formControlName="lastName" type="text" class="form-control" required>
+          </div>
+        </div>
+    </div>
+
+    <!-- Address Fields (Spanning Two Columns) -->
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <label for="address" class="form-label required-label">Address:</label>
+        <input id="address" formControlName="address" type="text" class="form-control" required>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <label for="address1" class="form-label">Address Line 2:</label>
+        <input id="address1" formControlName="address1" type="text" class="form-control">
+      </div>
+    </div>
+
+    <!-- City & State (Same Width as Name) -->
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="city" class="form-label required-label">City:</label>
+        <input id="city" formControlName="city" type="text" class="form-control" required>
+      </div>
+      <div class="col-md-6">
+        <label for="state" class="form-label required-label">State:</label>
+        <input id="state" formControlName="state" type="text" class="form-control" required>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="zipcode" class="form-label required-label">Zip Code:</label>
+        <input id="zipcode" formControlName="zipcode" type="text" class="form-control" required>
+      </div>
+    </div>
+
+    <!-- Phone Number & Phone Type -->
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="phone" class="form-label required-label">Phone Number:</label>
+        <input id="phone" formControlName="phone" type="text" class="form-control" required>
+      </div>
+      <div class="col-md-6">
+        <label for="phoneType" class="form-label required-label">Phone Type:</label>
+        <select id="phoneType" formControlName="phoneType" class="form-select" required>
+          <option value="mobile">Mobile</option>
+          <option value="home">Home</option>
+          <option value="work">Work</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Email Fields -->
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="email" class="form-label required-label">Email:</label>
+        <input id="email" formControlName="email" type="email" class="form-control" required onpaste="return false;">
+      </div>
+      <div class="col-md-6">
+        <label for="confirmEmail" class="form-label required-label">Confirm Email:</label>
+        <input id="confirmEmail" formControlName="confirmEmail" type="email" class="form-control" required onpaste="return false;">
+      </div>
+    </div>
+
+    <!-- Password Fields -->
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="password" class="form-label required-label">Password:</label>
+        <input id="password" formControlName="password" type="password" class="form-control" required onpaste="return false;">
+      </div>
+      <div class="col-md-6">
+        <label for="confirmPassword" class="form-label required-label">Confirm Password:</label>
+        <input id="confirmPassword" formControlName="confirmPassword" type="password" class="form-control" required onpaste="return false;">
+      </div>
+    </div>
+
+    <!-- Best Method of Contact (Final Row) -->
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="contactMethod" class="form-label required-label">Best Method of Contact:</label>
+        <select id="contactMethod" formControlName="contactMethod" class="form-select" required>
+          <option value="phone">Phone</option>
+          <option value="email">Email</option>
+          <option value="text">Text Message</option>
+          <option value="none">No Preference</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3 w-100">Save Profile</button>
+  </div>
+</form>

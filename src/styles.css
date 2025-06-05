@@ -1,3 +1,4 @@
+
 :root {
   --bg-color-light: white;
   --text-color-light: black;
@@ -5,17 +6,41 @@
   --text-color-dark: white;
 }
 
-body.light {
-  --bg-color: var(--bg-color-light);
-  --text-color: var(--text-color-light);
+body.dark-mode {
+  background-color: #121212;
+  color: white;
 }
 
-body.dark {
-  background-color: var(--bg-color-dark) !important;
-  color: var(--text-color-dark) !important;
+body.light {
+  background-color: white;
+  color: black;
 }
 
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
+}
+
+.footer {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+}
+
+.footer h5 {
+  font-weight: bold;
+}
+
+.footer a {
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer i {
+  font-size: 20px;
+}
+
+.footer {
+  padding-top: 20px; /* Ensures footer doesn't touch the form */
 }
