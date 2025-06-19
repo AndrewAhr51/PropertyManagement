@@ -28,11 +28,13 @@ export class ProfileComponent implements OnInit { // ✅ Implementing OnInit for
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
       phone: ['', Validators.required],
+      phoneType: ['', Validators.required],
       address: ['', Validators.required],
       address1: [''],
       city: ['', Validators.required],
       state: ['', Validators.required],
-      zipcode: ['', Validators.required]
+      zipcode: ['', Validators.required],
+      contactMethod: ['', Validators.required],
     }, { validator: this.matchFields('email', 'confirmEmail') });
 
   }

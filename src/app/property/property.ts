@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -33,8 +33,17 @@ interface IProperty {
   styleUrls: ['./property.css']
 })
 
-export class PropertyComponent { // ✅ Renamed for clarity
- public property: IProperty = {
+export class PropertyComponent implements OnInit {
+ propertyId: string  |     null = null; // ✅ Initialize propertyId to null
+
+ constructor(private route: ActivatedRoute) {}
+
+ ngOnInit() {
+   this.propertyId = this.route.snapshot.paramMap.get('id');
+   console.log('Property ID:', this.propertyId);
+ }
+
+  public property: IProperty = {
   property_id: 1,
   name: 'Sunset Villa',
   type: 'Apartment',
@@ -52,10 +61,4 @@ export class PropertyComponent { // ✅ Renamed for clarity
   status: 'Available',
   created_at: new Date(),
 };
-
- constructor(private route: ActivatedRoute) {}
- ngOnInit() {
-   const propertyId = this.route.snapshot.paramMap.get('id');
-   console.log('Property ID:', propertyId);
- }
 }
