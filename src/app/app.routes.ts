@@ -12,15 +12,15 @@ import { PropertyComponent } from './property/property';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirect root to login
-  { path: 'home', component: HomeComponent }, // Ensure Home is accessible via '/home'
+  { path: 'home', component: HomeComponent },
   { path: 'properties', component: Properties },
-  { path: 'property:/id', component: PropertyComponent},
+  { path: 'property/:id', component: PropertyComponent},
   { path: 'contact', component: Contact },
   { path: 'admin', component: Admin },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: Register },
   { path: 'profile', component: ProfileComponent },
-  { path: 'AccountActivity', component: AccountActivity},
+  { path: 'accountactivity', component: AccountActivity},
   { path: '**', redirectTo: '/login' } // Catch unknown paths & redirect to login
 ];
 

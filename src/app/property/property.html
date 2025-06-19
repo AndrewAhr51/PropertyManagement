@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="row">
-    <div class="col-md-6 mb-3">
-      <div class="card shadow-lg p-4">
+   <div class="col-md-6 mb-3 d-flex align-items-stretch">
+     <div class="card shadow-lg p-4 w-100">
         <h2 class="text-center mb-3">{{ property.name }}</h2>
         <p class="text-muted text-center mb-3">{{ property.type }}</p>
 
@@ -20,10 +20,9 @@
       </div>
     </div>
 
-    <div class="col-md-6">
-      <div class="card shadow-lg p-4">
+    <div class="col-md-6 mb-3 d-flex align-items-stretch">
+      <div class="card shadow-lg p-4 w-100">
         <h3 class="text-center mb-3">Financials & Status</h3>
-
         <div class="property-info">
           <p class="mb-3"><strong>Rent Price:</strong> ${{ property.rent_price }}/month</p>
           <p class="mb-3"><strong>Purchase Price:</strong> ${{ property.purchase_price }}</p>
