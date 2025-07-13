@@ -1,0 +1,233 @@
+/* 📦 Uploader Container */
+.uploader {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 740px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fbfbfb;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
+}
+
+/* 📄 Section Titles */
+.uploader h5 {
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* 📤 Upload Result */
+.upload-meta {
+  padding-left: 1rem;
+}
+
+.upload-meta li {
+  margin-bottom: 0.3rem;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* ⏳ Loader Message */
+.loading-message {
+  font-style: italic;
+  color: #555;
+  text-align: center;
+  padding: 1rem;
+  background: #f0f0f0;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+/* 🚨 Error Message */
+.error-message {
+  color: #d32f2f;
+  background-color: #ffe6e6;
+  border: 1px solid #f5c2c2;
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+}
+
+/* 📭 Empty State */
+.empty-state {
+  font-style: italic;
+  color: #777;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* 📁 Document List */
+.document-list {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.document-list h5 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+ul[role="list"] {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* 🗃️ Individual Document Item */
+.document-item {
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.document-item:hover {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.07);
+}
+
+/* 🔤 Document Name & Timestamp */
+.doc-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+
+.doc-info strong {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2b2b2b;
+}
+
+.timestamp {
+  font-size: 0.85rem;
+  color: #666;
+  background: #f0f0f0;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+}
+
+/* 🧩 Metadata Row */
+.doc-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* 📎 MIME Tag */
+.mime-tag {
+  background: #e3f2fd;
+  color: #1976d2;
+  font-size: 0.75rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+/* 🔐 Encrypted Badge */
+.encrypted-badge {
+  color: #d32f2f;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+/* 📥 Download Button */
+button {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: auto;
+  transition: background 0.2s ease-in-out;
+}
+
+button:hover {
+  background: #1565c0;
+}
+
+/* 📱 Responsive Cleanup */
+@media (max-width: 640px) {
+  .doc-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .doc-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  button {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+.upload-card {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  background-color: #ffffff;
+  border: 1px solid #cfcfcf;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.upload-card h5 {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  color: #333;
+}
+
+.upload-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.upload-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.upload-header strong {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2b2b2b;
+}
+
+.status-tag {
+  background-color: #e0f7fa;
+  color: #00796b;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.upload-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.5rem 1rem;
+}
+
+.upload-details div {
+  font-size: 0.9rem;
+  color: #444;
+}

@@ -9,20 +9,23 @@ import { Register } from './register/register';
 import { ProfileComponent } from './profile/profile';
 import { AccountActivity } from './AccountActivity/AccountActivity';
 import { PropertyComponent } from './property/property';
+import { DocumentUploader } from './documentuploader/documentuploader'; // ✅ Add this line
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirect root to login
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'properties', component: Properties },
-  { path: 'property/:id', component: PropertyComponent},
+  { path: 'property/:id', component: PropertyComponent },
   { path: 'contact', component: Contact },
   { path: 'admin', component: Admin },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: Register },
   { path: 'profile', component: ProfileComponent },
-  { path: 'accountactivity', component: AccountActivity},
-  { path: '**', redirectTo: '/login' } // Catch unknown paths & redirect to login
+  { path: 'accountactivity', component: AccountActivity },
+  { path: 'documentuploader', component: DocumentUploader },
+  { path: '**', redirectTo: '/login' }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

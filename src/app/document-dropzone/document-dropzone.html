@@ -1,0 +1,23 @@
+<div class="dropzone"
+     (dragover)="handleDragOver($event)"
+     (drop)="handleDrop($event)">
+  <p>Drag and drop a file here, or select below:</p>
+  <input type="file" (change)="handleFileInput($event)" />
+</div>
+
+<label for="fileName">File Name:</label>
+<input id="fileName" type="text" [(ngModel)]="fileName" />
+
+<label for="documentType">Document Type:</label>
+<input id="documentType" type="text" [(ngModel)]="documentType" />
+
+<label for="status">Status:</label>
+<input id="status" type="text" [(ngModel)]="status" />
+
+<label for="uploadedByUserId">Uploaded By User ID:</label>
+<input id="uploadedByUserId" type="number" [(ngModel)]="uploadedByUserId" />
+
+<label for="Description">Description:</label>
+<input id="Description" type="text" [(ngModel)]="description" />
+
+<button (click)="confirmUpload()" [disabled]="!selectedFile">Upload Document</button>
