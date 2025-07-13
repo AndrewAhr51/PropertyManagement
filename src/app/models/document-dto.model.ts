@@ -19,3 +19,9 @@ export interface DocumentDto {
   isEncrypted: boolean;
   references: DocumentReferenceDto[]; // normalized collection
 }
+export interface PagedResult<T> {
+  pageIndex: number;
+  pageSize: number;
+  totalCount: number;
+  data: T[];
+}
