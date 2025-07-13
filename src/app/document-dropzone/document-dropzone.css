@@ -1,0 +1,88 @@
+/* 🧲 Dropzone Container */
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  border: 2px dashed #0078d4;
+  border-radius: 12px;
+  background-color: #f8faff;
+  color: #444;
+  cursor: pointer;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.3s ease;
+  margin-bottom: 1.5rem;
+}
+
+.dropzone:hover {
+  border-color: #005fa3;
+  box-shadow: 0 4px 8px rgba(0, 120, 212, 0.1);
+}
+
+.dropzone p {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+/* 📂 File Input (Hidden but still clickable) */
+.dropzone input[type="file"] {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+}
+
+/* 📝 Form Labels */
+label {
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin: 0.75rem 0 0.25rem;
+}
+
+/* 🔣 Input Fields */
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  transition: border-color 0.2s ease;
+}
+
+input:focus {
+  border-color: #0078d4;
+  outline: none;
+}
+
+/* 📤 Upload Button */
+button {
+  margin-top: 1.5rem;
+  background-color: #0078d4;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:disabled {
+  background-color: #c3daf5;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #005fa3;
+}
+
+/* 🔄 Smooth Reveal Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}

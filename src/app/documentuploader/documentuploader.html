@@ -1,0 +1,65 @@
+<div class="uploader">
+  <h5>📤 Upload a New Document</h5>
+
+  <!-- 🪄 Dropzone Input -->
+  <document-dropzone (documentSelected)="uploadFromDropzone($event)"></document-dropzone>
+
+  <!-- ✅ Upload Preview -->
+  <div *ngIf="uploadedDocument" class="upload-card">
+  <h5>✅ Recently Uploaded</h5>
+  <div class="upload-content">
+    <div class="upload-header">
+      <strong>{{ uploadedDocument.name }}</strong>
+      <span class="status-tag">{{ uploadedDocument.status }}</span>
+    </div>
+
+    <div class="upload-details">
+      <div><strong>Type:</strong> {{ uploadedDocument.documentType }}</div>
+      <div><strong>MIME:</strong> {{ uploadedDocument.mimeType }}</div>
+      <div><strong>Size:</strong> {{ uploadedDocument.sizeInBytes }} bytes</div>
+      <div><strong>Uploaded At:</strong> {{ uploadedDocument.createDate | date:'MMM d, y h:mm a' }}</div>
+      <div><strong>Checksum:</strong> {{ uploadedDocument.checksum }}</div>
+      <div><strong>Encrypted:</strong> {{ uploadedDocument.isEncrypted ? 'Yes' : 'No' }}</div>
+    </div>
+  </div>
+</div>
+  <!-- 👇 Show only after user initiates an upload -->
+  <div *ngIf="uploadedDocument && loadingDocuments" class="loading-message">
+    <p>⏳ Loading documents...</p>
+  </div>
+
+  <!-- 🚨 Error -->
+  <div *ngIf="error && !loading" class="error-message">
+    ⚠️ {{ error }}
+  </div>
+
+  <!-- 📁 Documents List -->
+  <div *ngIf="!loading && documents.length > 0" class="document-list">
+    <h5>📚 Uploaded Documents</h5>
+    <ul role="list">
+      <li *ngFor="let doc of documents" class="document-item">
+        <div class="doc-info">
+          <strong>{{ doc.name }}</strong>
+          <span class="timestamp">{{ doc.uploadedAt | date:'MMM d, y h:mm a' }}</span>
+        </div>
+        <div class="doc-meta">
+         <span class="mime-tag">{{ doc?.mimeType || 'Unknown type' }}</span>
+
+          <span
+            *ngIf="doc.isEncrypted"
+            class="encrypted-badge"
+            aria-label="Encrypted Document"
+            title="Encrypted Document"
+          >🔐 Encrypted</span>
+
+          <button (click)="download(doc)" [attr.aria-label]="'Download ' + doc.name">Download</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 🕸️ Empty State -->
+  <div *ngIf="!loading && documents.length === 0 && !error" class="empty-state">
+    📭 No documents found yet.
+  </div>
+</div>
