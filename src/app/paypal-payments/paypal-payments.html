@@ -1,0 +1,56 @@
+<form #invoiceForm="ngForm" class="invoice-form" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="invoiceId">Invoice ID</label>
+    <input type="number" id="invoiceId" name="invoiceId" [(ngModel)]="invoice.InvoiceId" required
+      title="Unique identifier for the invoice" />
+  </div>
+
+  <div class="form-group">
+    <label for="tenantId">Tenant ID</label>
+    <input type="number" id="tenantId" name="tenantId" [(ngModel)]="invoice.TenantId"
+      title="ID of the tenant associated with this payment" />
+  </div>
+
+  <div class="form-group">
+    <label for="ownerId">Owner ID</label>
+    <input type="number" id="ownerId" name="ownerId" [(ngModel)]="invoice.OwnerId"
+      title="ID of the property owner receiving the payment" />
+  </div>
+
+  <div class="form-group">
+    <label for="orderId">Order ID</label>
+    <input type="text" id="orderId" name="orderId" [(ngModel)]="invoice.OrderId" required
+      title="PayPal-generated order ID (will be auto-filled)" />
+  </div>
+
+  <div class="form-group">
+    <label for="amount">Amount</label>
+    <input type="number" id="amount" name="amount" step="0.01" [(ngModel)]="invoice.Amount" required
+      title="Total payment amount in selected currency" />
+  </div>
+
+  <div class="form-group">
+    <label for="currencyCode">Currency</label>
+    <input type="text" id="currencyCode" name="currencyCode" [(ngModel)]="invoice.CurrencyCode"
+      title="ISO currency code (e.g., USD)" />
+  </div>
+
+  <div class="form-group">
+    <label for="paymentDate">Payment Date</label>
+    <input type="date" id="paymentDate" name="paymentDate"
+      [ngModel]="formattedPaymentDate" (ngModelChange)="updatePaymentDate($event)"
+      title="Date the payment is scheduled or processed" />
+  </div>
+
+  <div class="form-group">
+    <label for="note">Note</label>
+    <textarea id="note" name="note" [(ngModel)]="invoice.Note"
+      title="Optional note or memo attached to the payment"></textarea>
+  </div>
+
+  <div class="button-group">
+     <button type="submit" class="btn-primary">Submit</button>
+     <button (click)="launchApprovalLink()" [disabled]="!checkoutEnabled" class="btn-primary">  Launch PayPal Checkout</button>
+  </div>
+
+</form>
