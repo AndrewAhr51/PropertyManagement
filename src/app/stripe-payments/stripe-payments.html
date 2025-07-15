@@ -1,0 +1,100 @@
+<header class="page-header">
+  <div class="header-content">
+    <h1>💳 Tenant Invoices & Payments</h1>
+    <p class="subtitle">
+      Manage outstanding invoices, view payment status, and initiate secure Stripe checkout sessions.
+    </p>
+  </div>
+</header>
+
+<!-- 📋 Invoice List -->
+<div class="invoice-list-wrapper">
+  <!-- 🔍 Search Box -->
+  <div class="search-bar">
+    <label for="searchInput">Search:</label>
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      (input)="applyFiltersAndSort()"
+      placeholder="Search invoices..."
+    />
+  </div>
+
+  <!-- 🔎 Filter Controls -->
+  <div class="filter-bar">
+    <label>Filter:</label>
+    <select [(ngModel)]="filterStatus" (ngModelChange)="setFilter($event)">
+      <option value="All">All</option>
+      <option value="Paid">Paid</option>
+      <option value="Unpaid">Unpaid</option>
+    </select>  </div>
+
+  <table class="invoice-table">
+ <thead>
+  <tr>
+    <th (click)="toggleSort('isPaid')" class="sortable">
+      Paid
+      <span *ngIf="sortKey === 'isPaid'">{{ sortAsc ? '▲' : '▼' }}</span>
+    </th>
+    <th (click)="toggleSort('invoiceId')" class="sortable">
+      Invoice #
+      <span *ngIf="sortKey === 'invoiceId'">{{ sortAsc ? '▲' : '▼' }}</span>
+    </th>
+    <th (click)="toggleSort('propertyName')" class="sortable" style="width: 20%">
+      Property
+      <span *ngIf="sortKey === 'propertyName'">{{ sortAsc ? '▲' : '▼' }}</span>
+    </th>
+    <th (click)="toggleSort('amount')" class="sortable">
+      Amount
+      <span *ngIf="sortKey === 'amount'">{{ sortAsc ? '▲' : '▼' }}</span>
+    </th>
+    <th (click)="toggleSort('dueDate')" class="sortable">
+      Due Date
+      <span *ngIf="sortKey === 'dueDate'">{{ sortAsc ? '▲' : '▼' }}</span>
+    </th>
+    <th (click)="toggleSort('status')" class="sortable">
+      Status
+      <span *ngIf="sortKey === 'status'">{{ sortAsc ? '▲' : '▼' }}</span>
+    </th>
+    <th style="text-align: center;">Actions</th>
+  </tr>
+</thead>
+
+<tbody>
+  <tr *ngFor="let invoice of pagedInvoices">
+    <td>
+      <span
+        [ngClass]="{
+          'badge-paid': invoice.isPaid,
+          'badge-unpaid': !invoice.isPaid
+        }"
+      >
+        {{ invoice.isPaid ? 'Paid' : 'Unpaid' }}
+      </span>
+    </td>
+    <td>{{ invoice.invoiceId }}</td>
+    <td>{{ invoice.propertyName }}</td>
+    <td>{{ invoice.amount | currency:'USD' }}</td>
+    <td>{{ invoice.dueDate | date: 'MMM d, y' }}</td>
+    <td>{{ invoice.status }}</td>
+    <td style="text-align: center;">
+      <button (click)="viewInvoiceDetails(invoice)">Details</button>
+      <button (click)="createCheckoutSession(invoice)" [disabled]="invoice.isPaid">Pay Invoice</button>
+    </td>
+  </tr>
+</tbody>
+</table>
+  <!-- 🔄 Paging Controls -->
+  <div class="pagination-controls">
+    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 0">
+      ← Prev
+    </button>
+    <span>Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+    <button
+      (click)="changePage(currentPage + 1)"
+      [disabled]="currentPage + 1 >= totalPages"
+    >
+      Next →
+    </button>
+  </div>
+</div>

@@ -1,24 +1,41 @@
-<nav class="navbar navbar-expand-lg bg-light" [ngClass]="{'navbar-dark bg-dark': isDarkMode() }">
+<nav class="navbar navbar-expand-lg bg-light" [ngClass]="{ 'navbar-dark bg-dark': isDarkMode() }">
   <a class="navbar-brand" routerLink="/" routerLinkActive="active">Property Management</a>
+
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav me-auto">
+      <!-- Main nav links -->
       <li class="nav-item">
         <a class="nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/properties" routerLinkActive="active">Properties</a>
       </li>
-       <li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link" routerLink="/documentuploader" routerLinkActive="active">Document Upload</a>
       </li>
-        <li class="nav-item">
-        <a class="nav-link" routerLink="/paypal-payments" routerLinkActive="active">PayPal Payments</a>
+
+      <!-- Payments Dropdown -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Payments
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" routerLink="/paypal-payments" routerLinkActive="active">PayPal Payments</a>
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="/stripe-payments" routerLinkActive="active">Stripe Payments</a>
+          </li>
+        </ul>
       </li>
     </ul>
+
+    <!-- Auth, search, and theme toggles -->
     <ul class="navbar-nav">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="authDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -35,9 +52,11 @@
       <li class="nav-item" *ngIf="!isLoggedIn">
         <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
       </li>
+
       <li class="nav-item">
         <input type="text" class="form-control" placeholder="Search..." />
       </li>
+
       <li class="nav-item">
         <button class="btn btn-dark" (click)="toggleDarkMode()">
           {{ isDarkMode() ? 'Light Mode' : 'Dark Mode' }}

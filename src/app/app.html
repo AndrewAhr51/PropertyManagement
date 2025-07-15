@@ -1,18 +1,24 @@
+<!-- 🧭 Navigation -->
 <app-navigation></app-navigation>
-<main class="container mt-4">
-  <router-outlet></router-outlet>
-</main>
 
+<!-- 📦 Main Content Wrapper -->
+<div class="main-content container mt-4">
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>
+
+<!-- 🧱 Responsive Footer -->
 <footer class="footer bg-dark text-light py-4">
   <div class="container">
     <div class="row">
-      <!-- Left Section: Company Info -->
+      <!-- 🏢 Company Info -->
       <div class="col-md-4">
         <h5>Property Management</h5>
         <p>Providing top-tier property solutions with excellence.</p>
       </div>
 
-      <!-- Center Section: Navigation Links -->
+      <!-- 🧭 Quick Links -->
       <div class="col-md-4 text-center">
         <h5>Quick Links</h5>
         <ul class="list-unstyled">
@@ -23,7 +29,7 @@
         </ul>
       </div>
 
-      <!-- Right Section: Social Media & Contact -->
+      <!-- 📱 Social Media -->
       <div class="col-md-4 text-end">
         <h5>Follow Us</h5>
         <a href="#" class="text-light me-2"><i class="fab fa-facebook"></i></a>

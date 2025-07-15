@@ -1,0 +1,225 @@
+.invoice-list-wrapper {
+  padding: 2rem;
+  border-radius: 12px;
+  background: linear-gradient(to top left, #fafafa, #ffffff);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+/* 🔍 Search Bar */
+.search-bar {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: box-shadow 0.2s;
+}
+
+.search-bar input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #1976d230;
+}
+
+/* 🔎 Filter + Sort Controls */
+.filter-bar,
+.sort-bar {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.filter-bar select,
+.sort-bar button {
+  padding: 0.5rem 0.9rem;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.sort-bar button:hover {
+  background-color: #f2f2f2;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* 📋 Invoice Table */
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.invoice-table th,
+.invoice-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #efefef;
+}
+
+.invoice-table th {
+  background-color: #f5f7fa;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.invoice-table td {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* 🎯 Badge Styles */
+.badge-paid,
+.badge-unpaid {
+  font-size: 0.8rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 16px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.badge-paid {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.badge-unpaid {
+  background-color: #f44336;
+  color: #fff;
+}
+
+/* 🔍 Action Buttons */
+button {
+  margin-right: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background-color: #1976d2;
+  color: white;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+button:disabled {
+  background-color: #bbb;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #1565c0;
+  transform: scale(1.02);
+}
+
+/* 🔄 Pagination */
+.pagination-controls {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.pagination-controls button {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #1976d2;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+  background-color: #1565c0;
+  transform: scale(1.02);
+}
+
+.pagination-controls button:disabled {
+  background-color: #bbb;
+  cursor: not-allowed;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+  background-color: #e0e0e0;
+}
+
+.pagination-controls span {
+  font-size: 0.9rem;
+  color: #444;
+}
+
+/* ↕ Sortable Column */
+.sortable {
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s;
+}
+
+.sortable:hover {
+  background-color: #fafafa;
+}
+
+.sortable span {
+  font-size: 0.85rem;
+  margin-left: 4px;
+  color: #666;
+}
+
+/* 📘 Page Header */
+.page-header {
+  margin-bottom: 2rem;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(to right, #e9f0ff, #ffffff);
+  border-bottom: 2px solid #d0dbe8;
+  box-shadow: inset 0 -1px 0 #ddd;
+  border-radius: 8px 8px 0 0;
+}
+
+.header-content {
+  text-align: center;
+}
+
+.page-header h1 {
+  font-size: 2rem;
+  margin: 0;
+  color: #1976d2;
+  font-weight: 700;
+}
+
+.page-header .subtitle {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  color: #777;
+}
+
+.invoice-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+  flex-wrap: wrap;
+}
+
+.search-bar,
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

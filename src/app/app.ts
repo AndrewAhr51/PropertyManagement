@@ -32,14 +32,10 @@ ngOnInit() {
  document.body.classList.add(savedMode ? 'dark' : 'light');
 }
 
-toggleDarkMode() {
-  this.isDarkMode.update(prev => !prev);
-  const isDark = this.isDarkMode();
-
-  document.documentElement.className = ''; // Clear all classes
-  document.documentElement.classList.add(isDark ? 'dark-mode' : 'light');
-
-  localStorage.setItem('darkMode', isDark.toString());
+toggleDarkMode(): void {
+  const isDark = this.isDarkMode(); // however you're tracking it
+  document.body.classList.remove(isDark ? 'light-mode' : 'dark-mode');
+  document.body.classList.add(isDark ? 'dark-mode' : 'light-mode');
 }
 
   protected title = 'PropertyManagement';
