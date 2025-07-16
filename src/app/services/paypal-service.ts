@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'; // ✅ Correct import for map operator
 import { BaseApiService } from './base-api.service';
-import { PayPalDto, PayPalInitResponse, RawPayPalInitResponse, mapPayPalResponse } from '../models/paypal.model';
+import { CreatePayPalDto, PayPalInitResponse, RawPayPalInitResponse, mapPayPalResponse } from '../models/paypal.model';
 import { environment } from '../../environments/environment';
 import { Inject } from '@angular/core';
 import { tap } from 'rxjs/operators'; // ✅ Supposed to fix it
@@ -20,7 +20,7 @@ export class PayPalService {
 
   constructor(private api: BaseApiService) {}
 
-  initializeOrder_REAL(dto: PayPalDto): Observable<PayPalInitResponse> {
+  launchPayPal(dto: CreatePayPalDto): Observable<PayPalInitResponse> {
     console.log('[PayPalService] Sending DTO to backend:', dto);
     const url = `${this.baseUrl}/initialize`;
 

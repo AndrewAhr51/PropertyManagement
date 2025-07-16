@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CreateStripeDto, StripeResponseDto } from '../models/stripe-model'; // Adjust path as needed
+import { CreateStripeDto, StripeResponseDto, CheckoutUrlDto } from '../models/stripe-model'; // Adjust path as needed
 
 @Injectable({ providedIn: 'root' })
 export class StripeService {
@@ -16,6 +16,12 @@ export class StripeService {
     });
   }
 
+  CreateCheckoutSession(dto: CreateStripeDto): Observable<CheckoutUrlDto> {
+    const url = `${this.stripeBaseUrl}/create-checkout-session`;
+    return this.http.post<CheckoutUrlDto>(url, dto, {
+      headers: this.getHeaders()
+    });
+  }
   /**
    * Initializes a Stripe payment session
    */

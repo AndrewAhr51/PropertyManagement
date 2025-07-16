@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { InvoiceDto, InvoiceListByTenantDto } from '../models/invoice.model'; // Make sure this path matches your project
+import { SignalRService } from './signalr-service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { InvoiceDto, InvoiceListByTenantDto } from '../models/invoice.model'; //
 export class InvoiceService {
     private readonly baseUrl = 'https://localhost:7144/api/invoices'; /// Replace with your actual base URL
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private signalR: SignalRService) {}
 
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
