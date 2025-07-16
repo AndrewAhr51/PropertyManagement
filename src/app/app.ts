@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login';
 import { Navigation } from "./navigation/navigation";
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -20,7 +21,8 @@ export class App implements OnInit {
   declarations: [LoginComponent],
   imports: [
     BrowserModule,
-    ReactiveFormsModule // ✅ Add this to imports
+    ReactiveFormsModule,
+     // ✅ Add this to imports
   ],
   bootstrap: [LoginComponent]
 })

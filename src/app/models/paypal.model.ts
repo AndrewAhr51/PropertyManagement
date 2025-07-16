@@ -1,26 +1,26 @@
-export interface PayPalDto {
-  InvoiceId: number;
-  TenantId?: number | null;
-  OwnerId?: number | null;
-  OrderId: string;            // Populated after order creation
-  Amount: number;
-  CurrencyCode: string;
-  PaymentDate: Date;
-  Note: string;
-  Metadata: { [key: string]: string };
+export interface CreatePayPalDto {
+  invoiceId: number;
+  tenantId?: number | null;
+  ownerId?: number | null;
+  orderId: string;            // Populated after order creation
+  amount: number;
+  currency: string;
+  paymentDate: Date;
+  note: string;
+  metadata: { [key: string]: string };
 }
 
 // Optional helper for default initialization
-export const createPayPalDto = (): PayPalDto => ({
-  InvoiceId: 0,
-  TenantId: null,
-  OwnerId: null,
-  OrderId: '',
-  Amount: 0.0,
-  CurrencyCode: 'USD',
-  PaymentDate: new Date(),
-  Note: 'Payment via PayPal',
-  Metadata: {}
+export const createPayPalDto = (): CreatePayPalDto => ({
+  invoiceId: 0,
+  tenantId: null,
+  ownerId: null,
+  orderId: '',
+  amount: 0.0,
+  currency: 'USD',
+  paymentDate: new Date(),
+  note: 'Payment via PayPal',
+  metadata: {}
 });
 
 export interface RawPayPalInitResponse {

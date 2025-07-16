@@ -11,7 +11,7 @@ import { AccountActivity } from './AccountActivity/AccountActivity';
 import { PropertyComponent } from './property/property';
 import { DocumentUploader } from './documentuploader/documentuploader'; // ✅ Add this line
 import { PayPalPayments } from './paypal-payments/paypal-payments';
-import { StripePayments } from './stripe-payments/stripe-payments';
+import { Payments } from './payments/payments';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -26,7 +26,7 @@ export const routes: Routes = [
   { path: 'accountactivity', component: AccountActivity },
   { path: 'documentuploader', component: DocumentUploader },
   { path: 'paypal-payments', component: PayPalPayments },
-  { path: 'stripe-payments', component: StripePayments },
+  { path: 'payments', component: Payments },
   { path: '**', redirectTo: '/login' }
 ];
 

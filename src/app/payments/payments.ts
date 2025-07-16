@@ -2,21 +2,24 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { StripeService } from '../services/stripe-service';
+import { PayPalService } from '../services/paypal-service';
 import { InvoiceService } from '../services/invoice-service';
 import { SignalRService } from '../services/signalr-service';
 import { InvoiceListByTenantDto, InvoiceDto } from '../models/invoice.model';
 import { CreateStripeDto, StripeResponseDto } from '../models/stripe-model';
+import { CreatePayPalDto, PayPalInitResponse, RawPayPalInitResponse, mapPayPalResponse } from '../models/paypal.model';
 import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-stripe-payments',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './stripe-payments.html',
-  styleUrl: './stripe-payments.css'
+  templateUrl: './payments.html',
+  styleUrl: './payments.css'
 })
-export class StripePayments implements OnInit {
+export class Payments implements OnInit {
   private stripeService = inject(StripeService);
+  private paypalService = inject(PayPalService);
   private invoiceService = inject(InvoiceService);
   private signalRService = inject(SignalRService);
   private cdr = inject(ChangeDetectorRef);
@@ -35,7 +38,8 @@ export class StripePayments implements OnInit {
   currentPage = 0;
   totalPages = 0;
 
-  approvalUrl: string | null = null;
+  approvalLink: string | null = null;
+
 
   ngOnInit(): void {
     this.filterStatus = 'All';
@@ -45,7 +49,7 @@ export class StripePayments implements OnInit {
     this.currentPage = 0;
 
     this.signalRService.startConnection();
-    this.signalRService.addInvoiceListener((invoiceId: number) => {
+    this.signalRService.listenForInvoiceStatus((invoiceId: number) => {
       console.log('[📡 Real-time update received]', invoiceId);
       this.refreshInvoice(invoiceId);
     });
@@ -164,22 +168,20 @@ export class StripePayments implements OnInit {
       }
     };
 
-    this.stripeService.processPayment(dto).subscribe({
-      next: (res: StripeResponseDto) => {
-        this.approvalUrl = res.clientSecret;
-        console.log('[✅ Stripe session created]', res);
-        this.launchStripeCheckout();
+
+    this.stripeService.CreateCheckoutSession(dto).subscribe({
+      next: (response) => {
+        if (response?.checkoutUrl) {
+          window.location.href = response.checkoutUrl; // 🔀 Full-page redirect
+        } else {
+           console.error('❌ Stripe did not return a valid payment URL.');
+        }
       },
       error: (err) => {
-        console.error('[❌ Stripe session failed]', err);
-      }
-    });
+         console.error('❌ Stripe error:', err);
   }
+});
 
-  launchStripeCheckout(): void {
-    if (this.approvalUrl) {
-      window.open(this.approvalUrl, '_blank');
-    }
   }
 
   refreshInvoice(invoiceId: number): void {
@@ -199,4 +201,59 @@ export class StripePayments implements OnInit {
       }
     });
   }
+
+  initializePayPal(invoice: InvoiceDto): void {
+    const dto: CreatePayPalDto = {
+      invoiceId: invoice.invoiceId,
+      tenantId: invoice.tenantId,
+      ownerId: invoice.ownerId,
+      orderId: '', // Will be populated after order creation
+      amount: invoice.amount - invoice.amountPaid,
+      currency: 'USD',
+      paymentDate: new Date(),
+      note: 'Payment via PayPal',
+      metadata: {
+        invoiceId: invoice.invoiceId.toString(),
+        tenant: invoice.tenantName ?? '',
+        property: invoice.propertyName ?? '',
+        owner: invoice.ownerName ?? ''
+      }
+    };
+
+    this.paypalService.launchPayPal(dto).subscribe({
+      next: (res: PayPalInitResponse) => {
+        const mappedResponse = mapPayPalResponse(res);
+        this.approvalLink = mappedResponse.approvalLink;
+        console.log('[✅ PayPal session created]', mappedResponse);
+      },
+      error: (err) => {
+        console.error('[❌ PayPal session failed]', err);
+      }
+    });
+  }
+  // Placeholder for Plaid integration
+  /*  createPlaidSession(invoice: InvoiceDto): void {
+    // Implementation for Plaid session creation
+  } */
+  processSelectedPayment(invoice: InvoiceDto, event: Event): void {
+    const selectedPayment = (event.target as HTMLSelectElement).value;
+
+  if (!selectedPayment || invoice.isPaid) return;
+
+  switch (selectedPayment) {
+    case 'stripe':
+      this.createCheckoutSession(invoice);
+      break;
+    case 'paypal':
+      this.initializePayPal(invoice);
+      break;
+    case 'plaid':
+      //this.createPlaidSession(invoice);
+      break;
+    default:
+      console.warn('Unrecognized payment method:', selectedPayment);
+  }
+
+}
+
 }

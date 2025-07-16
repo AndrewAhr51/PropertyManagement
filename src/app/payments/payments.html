@@ -61,29 +61,38 @@
 </thead>
 
 <tbody>
-  <tr *ngFor="let invoice of pagedInvoices">
-    <td>
-      <span
-        [ngClass]="{
-          'badge-paid': invoice.isPaid,
-          'badge-unpaid': !invoice.isPaid
-        }"
-      >
-        {{ invoice.isPaid ? 'Paid' : 'Unpaid' }}
-      </span>
+  <ng-container *ngFor="let invoice of pagedInvoices">
+    <!-- 💼 Invoice Summary Row -->
+    <tr>
+      <td>
+        <span [ngClass]="{
+            'badge-paid': invoice.isPaid,
+            'badge-unpaid': !invoice.isPaid
+          }">
+          {{ invoice.isPaid ? 'Paid' : 'Unpaid' }}
+        </span>
+      </td>
+      <td>{{ invoice.invoiceId }}</td>
+      <td>{{ invoice.propertyName }}</td>
+      <td>{{ invoice.amount | currency:'USD' }}</td>
+      <td>{{ invoice.dueDate | date: 'MMM d, y' }}</td>
+      <td>{{ invoice.status }}</td>
+  <td>
+  <div class="actions-inline">
+    <button class="details-btn" (click)="viewInvoiceDetails(invoice)">Details</button>
+    <select (change)="processSelectedPayment(invoice, $event)" [disabled]="invoice.isPaid">
+      <option value="">Select Payment</option>
+      <option value="stripe">Stripe</option>
+      <option value="paypal">PayPal</option>
+      <option value="plaid">Plaid</option>
+          <option value="echeck" disabled>E-Check (coming soon)</option>
+        </select>
+      </div>
+
     </td>
-    <td>{{ invoice.invoiceId }}</td>
-    <td>{{ invoice.propertyName }}</td>
-    <td>{{ invoice.amount | currency:'USD' }}</td>
-    <td>{{ invoice.dueDate | date: 'MMM d, y' }}</td>
-    <td>{{ invoice.status }}</td>
-    <td style="text-align: center;">
-      <button (click)="viewInvoiceDetails(invoice)">Details</button>
-      <button (click)="createCheckoutSession(invoice)" [disabled]="invoice.isPaid">Pay Invoice</button>
-    </td>
-  </tr>
-</tbody>
-</table>
+    </tr>
+</ng-container>
+</tbody></table>
   <!-- 🔄 Paging Controls -->
   <div class="pagination-controls">
     <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 0">

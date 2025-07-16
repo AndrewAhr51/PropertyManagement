@@ -19,3 +19,6 @@ export interface StripeResponseDto {
   invoiceReference?: string;
 }
 
+export interface CheckoutUrlDto {
+  checkoutUrl: string;
+}

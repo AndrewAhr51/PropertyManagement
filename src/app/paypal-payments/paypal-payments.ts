@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { PayPalService } from '../services/paypal.service';
-import { PayPalDto, PayPalInitResponse } from '../models/paypal.model'; // ✅ Only import what’s needed
+import { PayPalService } from '../services/paypal-service';
+import { CreatePayPalDto, PayPalInitResponse } from '../models/paypal.model'; // ✅ Only import what’s needed
 
 @Component({
   selector: 'app-paypal-payments',
@@ -14,16 +14,16 @@ import { PayPalDto, PayPalInitResponse } from '../models/paypal.model'; // ✅ O
 export class PayPalPayments implements OnInit {
     checkoutEnabled = false;
     latestApprovalLink: string | null = null;
-    invoice: PayPalDto = {
-    InvoiceId: 0,
-    TenantId: 0,
-    OwnerId: 0,
-    OrderId: '',
-    Amount: 0.0,
-    CurrencyCode: 'USD',
-    PaymentDate: new Date(),
-    Note: 'Payment via PayPal',
-    Metadata: {
+    invoice: CreatePayPalDto = {
+    invoiceId: 0,
+    tenantId: 0,
+    ownerId: 0,
+    orderId: '',
+    amount: 0.0,
+    currency: 'USD',
+    paymentDate: new Date(),
+    note: 'Payment via PayPal',
+    metadata: {
       CardType: 'Visa',
       Last4Digits: '8084'
     }
@@ -36,7 +36,7 @@ export class PayPalPayments implements OnInit {
   }
 
   get formattedPaymentDate(): string {
-    return this.invoice.PaymentDate.toISOString().split('T')[0];
+    return this.invoice.paymentDate.toISOString().split('T')[0];
   }
 
   updatePaymentDate(dateString: string): void {
@@ -46,17 +46,17 @@ export class PayPalPayments implements OnInit {
       return;
     }
     parsedDate.setHours(0, 0, 0, 0);
-    this.invoice.PaymentDate = parsedDate;
-    console.log('Updated PaymentDate:', this.invoice.PaymentDate);
+    this.invoice.paymentDate = parsedDate;
+    console.log('Updated PaymentDate:', this.invoice.paymentDate);
   }
 
 
   onSubmit(): void {
     console.log('Submitting PayPal order:', this.invoice);
 
-    this.paypalService.initializeOrder_REAL(this.invoice).subscribe(
+    this.paypalService.launchPayPal(this.invoice).subscribe(
       (res: PayPalInitResponse) => {
-        this.invoice.OrderId = res.orderId;
+        this.invoice.orderId = res.orderId;
         this.latestApprovalLink = res.approvalLink;
 
         if (this.latestApprovalLink) {
