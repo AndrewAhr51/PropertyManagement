@@ -22,13 +22,5 @@ export class StripeService {
       headers: this.getHeaders()
     });
   }
-  /**
-   * Initializes a Stripe payment session
-   */
-  processPayment(dto: CreateStripeDto): Observable<StripeResponseDto> {
-    const url = `${this.stripeBaseUrl}/stripe-payment`;
-    return this.http.post<StripeResponseDto>(url, dto, {
-      headers: this.getHeaders()
-    });
-  }
+
 }
