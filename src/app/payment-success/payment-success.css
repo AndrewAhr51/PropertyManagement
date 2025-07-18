@@ -1,0 +1,81 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #f0f4f8, #d9e2ec);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 480px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  animation: fadeIn 0.8s ease-out;
+}
+
+h1 {
+  color: #2f80ed;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.checkmark {
+  font-size: 3rem;
+  color: #27ae60;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  color: #4f4f4f;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.metadata {
+  font-size: 0.95rem;
+  color: #333;
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: left;
+}
+
+a.button {
+  display: inline-block;
+  margin-top: 1.2rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #2f80ed;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+a.button:hover {
+  background-color: #1366d6;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

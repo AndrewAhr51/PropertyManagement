@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="icon">⚠️</div>
+  <h1>Payment Cancelled</h1>
+  <p>Your payment was not completed. No charges have been made.</p>
+
+ <p>Your payment was not completed. No charges have been made.</p>
+
+<div class="details" *ngIf="invoiceId">
+  <strong>Invoice:</strong> #{{ invoiceId }}<br />
+  <strong>Tenant:</strong> {{ tenantId }}<br />
+  <strong>Property:</strong> {{ propertyId }}<br />
+  <strong>Amount:</strong> ${{ amount }}
+</div>
+
+<a class="button" (click)="retryPayment()">Retry Payment</a>
+
+  <a class="button" href="/">Return to Dashboard</a>
+</div>
