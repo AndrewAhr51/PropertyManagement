@@ -12,6 +12,8 @@ import { PropertyComponent } from './property/property';
 import { DocumentUploader } from './documentuploader/documentuploader'; // ✅ Add this line
 import { PayPalPayments } from './paypal-payments/paypal-payments';
 import { Payments } from './payments/payments';
+import { PaymentSuccess } from './payment-success/payment-success';
+import { PaymentCancel } from './payment-cancel/payment-cancel';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -27,6 +29,8 @@ export const routes: Routes = [
   { path: 'documentuploader', component: DocumentUploader },
   { path: 'paypal-payments', component: PayPalPayments },
   { path: 'payments', component: Payments },
+  { path: 'payment-success', component: PaymentSuccess }, // ✅ Success redirect
+  { path: 'payment-cancel', component: PaymentCancel },   // ✅ Cancel redirect
   { path: '**', redirectTo: '/login' }
 ];
 

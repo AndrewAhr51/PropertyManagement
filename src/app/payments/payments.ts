@@ -150,6 +150,7 @@ export class Payments implements OnInit {
     console.log('🔍 View invoice details:', invoice);
   }
 
+
   createCheckoutSession(invoice: InvoiceDto): void {
     const dto: CreateStripeDto = {
       invoiceId: invoice.invoiceId,
