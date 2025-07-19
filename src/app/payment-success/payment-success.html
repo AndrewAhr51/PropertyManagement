@@ -1,15 +1,20 @@
-<div class="card">
-  <div class="checkmark">✔️</div>
-  <h1>Payment Successful</h1>
-  <p>Thanks for your payment. Your transaction is complete!</p>
+<div class="success-container" *ngIf="!error">
+  <h2 class="title">✅ Payment Successful</h2>
 
-  <div class="metadata">
-    <strong>Invoice:</strong> #{{ invoiceId }}<br />
-    <strong>Tenant:</strong> {{ tenantId }}<br />
-    <strong>Property:</strong> {{ propertyId }}<br />
-    <strong>Amount Paid:</strong> ${{ amount }}<br />
-    <small><strong>Session Reference:</strong> {{ sessionId }}</small>
+  <div class="details">
+    <div><strong>Invoice ID:</strong> {{ invoiceId }}</div>
+    <div><strong>Tenant ID:</strong> {{ tenantId }}</div>
+    <div><strong>Property ID:</strong> {{ propertyId }}</div>
+    <div><strong>Amount Paid:</strong> ${{ amount.toFixed(2) }}</div>
+    <div><strong>Session ID:</strong> {{ sessionId }}</div>
   </div>
 
-  <a class="button" href="/">Return to Dashboard</a>
+  <p class="confirmation">Your payment has been securely processed. A receipt will be sent shortly.</p>
+  <button class="button" routerLink="/dashboard">Return to Dashboard</button>
+</div>
+
+<div class="error-container" *ngIf="error">
+  <h2>❌ Payment Failed</h2>
+  <p>{{ error }}</p>
+  <button class="button retry" routerLink="/payments">Try Again</button>
 </div>
