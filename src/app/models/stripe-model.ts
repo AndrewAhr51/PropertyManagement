@@ -22,3 +22,25 @@ export interface StripeResponseDto {
 export interface CheckoutUrlDto {
   checkoutUrl: string;
 }
+export interface StripeSessionDto {
+  sessionId: string;
+  amountTotal: number;
+  currency: string;
+  metadata: {
+    invoiceId: string;
+    tenantId: string;
+    propertyId: string;
+    ownerId: string;
+  };
+}
+
+interface CreatePaymentDto {
+  amount: number;
+  paidOn: string;
+  invoiceId: number;
+  tenantId?: number | null;
+  ownerId?: number | null;
+  currency: string;
+  paymentMethod: string;
+  metadata: Record<string, string>;
+}

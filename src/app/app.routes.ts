@@ -29,7 +29,9 @@ export const routes: Routes = [
   { path: 'documentuploader', component: DocumentUploader },
   { path: 'paypal-payments', component: PayPalPayments },
   { path: 'payments', component: Payments },
-  { path: 'payment-success', component: PaymentSuccess }, // ✅ Success redirect
+  { path: 'payment-success',
+  loadComponent: () =>
+    import('./payment-success/payment-success').then(m => m.PaymentSuccess)},
   { path: 'payment-cancel', component: PaymentCancel },   // ✅ Cancel redirect
   { path: '**', redirectTo: '/login' }
 ];
