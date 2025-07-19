@@ -1,81 +1,208 @@
+/* 🌍 Base Layout */
+:host,
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to right, #f0f4f8, #d9e2ec);
-  margin: 0;
-  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-.card {
-  background: #ffffff;
+/* 🎬 Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInRow {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* 🧾 Reusable Receipt Link */
+.pdf-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+/* Light Mode */
+@media (prefers-color-scheme: light) {
+  body {
+    background: linear-gradient(to right, #f0f4f8, #d9e2ec);
+    color: #333;
+  }
+
+  .success-container,
+  .error-container {
+    background: #fff;
+    color: #333;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .error-container {
+    background: #fff4f4;
+    color: #b22;
+    box-shadow: 0 4px 16px rgba(255, 0, 0, 0.1);
+  }
+
+  .details {
+    background: #f5f5f5;
+    color: #333;
+  }
+
+  .event-type     { color: #333; }
+  .event-status.success  { color: green; }
+  .event-status.error    { color: red; }
+  .event-status.received { color: orange; }
+  .event-status.skipped  { color: gray; }
+  .event-details { color: #b22; }
+
+  .pdf-link { color: #0078d4; }
+  .pdf-link:hover { text-decoration: none; }
+
+  .button,
+  a.button {
+    background-color: #2f80ed;
+    color: white;
+  }
+  .button:hover,
+  a.button:hover {
+    background-color: #1366d6;
+  }
+
+  .retry {
+    background-color: #eb5757;
+  }
+  .retry:hover {
+    background-color: #d43f3f;
+  }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: linear-gradient(to right, #1a1a1a, #2c2c2c);
+    color: #e0e0e0;
+  }
+
+  .success-container,
+  .error-container {
+    background: #2b2b2b;
+    color: #e0e0e0;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
+  }
+
+  .error-container {
+    background: #402020;
+    color: #ffaaaa;
+  }
+
+  .details {
+    background: #3a3a3a;
+    color: #ddd;
+  }
+
+  .event-type     { color: #ccc; }
+  .event-time     { color: #aaa; }
+  .event-status.success  { color: #7cf77c; }
+  .event-status.error    { color: #ff8080; }
+  .event-status.received { color: #ffc761; }
+  .event-status.skipped  { color: #888; }
+  .event-details { color: #ff9999; }
+
+  .pdf-link { color: #69b2ff; }
+  .pdf-link:hover { text-decoration: none; }
+
+  .button,
+  a.button {
+    background-color: #4a90e2;
+    color: white;
+  }
+  .button:hover,
+  a.button:hover {
+    background-color: #357ac5;
+  }
+
+  .retry {
+    background-color: #d43f3f;
+  }
+  .retry:hover {
+    background-color: #b83030;
+  }
+}
+
+/* 📦 Container Styles */
+.success-container,
+.error-container {
   border-radius: 12px;
   padding: 2rem;
-  max-width: 480px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  animation: fadeIn 0.8s ease-out;
+  max-width: 640px;
+  width: 100%;
+  animation: fadeIn 0.6s ease-out;
 }
 
-h1 {
-  color: #2f80ed;
-  font-size: 1.8rem;
+/* 🧾 Header Text */
+.title {
+  font-size: 1.6rem;
   margin-bottom: 1rem;
 }
-
-.checkmark {
-  font-size: 3rem;
-  color: #27ae60;
-  margin-bottom: 0.5rem;
-}
-
-p {
-  color: #4f4f4f;
+.confirmation {
   font-size: 1rem;
-  margin-bottom: 1.5rem;
+  margin: 1rem 0 1.5rem;
 }
 
-.metadata {
-  font-size: 0.95rem;
-  color: #333;
-  background: #f5f5f5;
+/* 💳 Payment Details Block */
+.details {
   border-radius: 8px;
   padding: 1rem;
   text-align: left;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
 }
 
-a.button {
-  display: inline-block;
-  margin-top: 1.2rem;
-  padding: 0.75rem 1.5rem;
-  background-color: #2f80ed;
-  color: white;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
+/* 🧾 Receipt Section */
+.receipt-preview {
+  margin-top: 2rem;
+}
+.receipt-preview h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
 }
 
-a.button:hover {
-  background-color: #1366d6;
+/* 📡 Webhook Timeline */
+.webhook-panel {
+  margin-top: 2.5rem;
+  text-align: left;
 }
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.webhook-panel h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
 }
-:host {
+.webhook-panel ul {
+  padding-left: 0;
+  list-style: none;
+}
+.webhook-panel li {
+  margin-bottom: 8px;
+}
+.event-row {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  gap: 1rem;
+  font-weight: 500;
+  animation: fadeInRow 0.4s ease-out;
+}
+.event-type {
+  width: 220px;
+}
+.event-time {
+  width: 160px;
+}
+.pdf-link.disabled {
+  color: gray;
+  opacity: 0.8;
+  cursor: default;
+  text-decoration: none;
 }

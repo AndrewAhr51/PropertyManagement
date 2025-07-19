@@ -1,7 +1,9 @@
 export interface CreateStripeDto {
   invoiceId: number;
   propertyId: number;
+  propertyName: string;
   tenantId?: number;
+  tenantName: string;
   ownerId?: number;
   paidOn: string; // ISO string for DateTime
   amount: number;
@@ -29,7 +31,9 @@ export interface StripeSessionDto {
   metadata: {
     invoiceId: string;
     tenantId: string;
+    tenantName: string;
     propertyId: string;
+    propertyName: string;
     ownerId: string;
   };
 }
@@ -39,8 +43,12 @@ interface CreatePaymentDto {
   paidOn: string;
   invoiceId: number;
   tenantId?: number | null;
+  tenantName: string;
+  propertyId?: number | null;
+  propertyName: string;
   ownerId?: number | null;
   currency: string;
   paymentMethod: string;
   metadata: Record<string, string>;
 }
+

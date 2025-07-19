@@ -156,6 +156,8 @@ export class Payments implements OnInit {
       invoiceId: invoice.invoiceId,
       propertyId: invoice.propertyId,
       tenantId: invoice.tenantId,
+      tenantName: invoice.tenantName ?? '',
+      propertyName: invoice.propertyName ?? '',
       ownerId: invoice.ownerId,
       paidOn: new Date().toISOString(),
       amount: invoice.amount - invoice.amountPaid,

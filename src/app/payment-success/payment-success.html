@@ -1,18 +1,60 @@
-<div class="success-container" *ngIf="!error">
+<div class="success-container" *ngIf="!error && isLoaded">
   <h2 class="title">✅ Payment Successful</h2>
 
+  <!-- 💳 Payment Details -->
   <div class="details">
-    <div><strong>Invoice ID:</strong> {{ invoiceId }}</div>
-    <div><strong>Tenant ID:</strong> {{ tenantId }}</div>
-    <div><strong>Property ID:</strong> {{ propertyId }}</div>
-    <div><strong>Amount Paid:</strong> ${{ amount.toFixed(2) }}</div>
-    <div><strong>Session ID:</strong> {{ sessionId }}</div>
+    <div><strong>Invoice ID:</strong> {{ invoiceId || 'Not available' }}</div>
+    <div><strong>Tenant Name:</strong> {{ tenantName || 'Not available' }}</div>
+    <div><strong>Property Name:</strong> {{ propertyName || 'Not available' }}</div>
+    <div><strong>Amount Paid:</strong> {{ amount > 0 ? ('$' + amount.toFixed(2)) : 'Not available' }}</div>
+    <div><strong>Session ID:</strong> {{ sessionId || 'Not available' }}</div>
   </div>
 
-  <p class="confirmation">Your payment has been securely processed. A receipt will be sent shortly.</p>
-  <button class="button" routerLink="/dashboard">Return to Dashboard</button>
+  <p class="confirmation">
+    Your payment has been securely processed. A receipt will be sent shortly.
+  </p>
+  <button class="button" routerLink="/payments" (click)="logClick()">Return to Payments</button>
+
+  <!-- 🧾 Receipt Summary -->
+  <div class="receipt-preview" *ngIf="dto?.receiptUrl">
+  <h4>🧾 Receipt</h4>
+  <a
+    *ngIf="dto?.receiptUrl; else placeholder"
+    [href]="dto?.receiptUrl"
+    target="_blank"
+    rel="noopener"
+    class="pdf-link"
+  >
+    📄 Download Payment Receipt (PDF)
+  </a>
+  <ng-template #placeholder>
+    <div class="pdf-link disabled">
+      Receipt unavailable at this time
+    </div>
+  </ng-template>
 </div>
 
+  <!-- 📡 Webhook Delivery Timeline -->
+  <div class="webhook-panel" *ngIf="webhookEvents?.length">
+    <h4>📡 Stripe Webhook Delivery</h4>
+    <ul>
+      <li *ngFor="let e of webhookEvents" class="fade-in-row">
+        <div class="event-row">
+          <span class="event-type">{{ e.eventType }}</span>
+          <span class="event-time">{{ e.receivedAt | date: 'short' }}</span>
+          <span class="event-status" [ngClass]="getOutcomeClass(e.outcome)">
+            {{ e.outcome }}
+          </span>
+        </div>
+        <div class="event-details" *ngIf="e.errorDetails">
+          🔥 {{ e.errorDetails }}
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- ❌ Error Block -->
 <div class="error-container" *ngIf="error">
   <h2>❌ Payment Failed</h2>
   <p>{{ error }}</p>
