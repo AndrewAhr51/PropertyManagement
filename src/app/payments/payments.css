@@ -304,3 +304,14 @@ button:hover:not(:disabled) {
   outline: none;
   box-shadow: 0 0 0 2px #1976d230;
 }
+
+.webhook-panel ul {
+  padding-left: 1rem;
+}
+.webhook-panel li {
+  margin-bottom: 4px;
+}
+.success { color: green; }
+.error { color: red; }
+.received { color: orange; }
+.skipped { color: gray; }
